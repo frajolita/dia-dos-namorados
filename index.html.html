@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Feliz Dia dos Namorados + Jogo do Código do Coração</title>
+  <style>
+    /* Estilo vintage, clean e romântico */
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto&display=swap');
+
+    body {
+      background: #f7f1e1; /* bege clarinho */
+      font-family: 'Roboto', sans-serif;
+      color: #5b3a29; /* marrom suave */
+      margin: 0;
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 4rem;
+      margin-bottom: 0.2rem;
+      color: #8b5e3c;
+      text-shadow: 1px 1px 2px #d1bfa7;
+    }
+
+    h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.8rem;
+      margin-top: 50px;
+      margin-bottom: 20px;
+      color: #a67853;
+      letter-spacing: 0.08em;
+      text-shadow: 1px 1px 3px #cfc1aa;
+    }
+
+    p {
+      font-size: 1.25rem;
+      max-width: 480px;
+      color: #6b4e32;
+      margin-bottom: 1.8rem;
+      font-weight: 500;
+    }
+
+    button {
+      background-color: #cfa76e;
+      border: 2px solid #a47c45;
+      padding: 12px 32px;
+      border-radius: 30px;
+      color: #4b3520;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 3px 6px rgba(164, 124, 69, 0.5);
+      transition: background-color 0.3s ease, color 0.3s ease;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    button:hover {
+      background-color: #a47c45;
+      color: #f3e7d3;
+    }
+
+    button:disabled {
+      background-color: #ddd1b8;
+      color: #999;
+      border-color: #ccc;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .heart {
+      font-size: 6rem;
+      color: #d4a373;
+      margin-bottom: 1rem;
+      text-shadow: 1px 1px 3px #b59062;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+
+    input[type="text"], input.quiz-input {
+      padding: 12px 18px;
+      border-radius: 20px;
+      border: 1.5px solid #b4976b;
+      font-size: 1.15rem;
+      width: 100%;
+      max-width: 350px;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      outline: none;
+      background-color: #f9f5ec;
+      color: #5b3a29;
+      font-weight: 600;
+      box-shadow: inset 0 0 6px #d9c9a3;
+      transition: border-color 0.3s ease;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    input[type="text"]:focus, input.quiz-input:focus {
+      border-color: #a47c45;
+      box-shadow: 0 0 8px 2px #a47c45aa;
+      background-color: #fffdf5;
+    }
+
+    .message, #resultadoQuiz {
+      margin-top: 1rem;
+      font-size: 1.3rem;
+      min-height: 2em;
+      font-weight: 700;
+      color: #7f5f33;
+      text-shadow: 1px 1px 2px #d3bea3;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    form {
+      margin-top: 30px;
+      text-align: left;
+      max-width: 480px;
+      width: 100%;
+      background: #fdf9f0;
+      padding: 30px 35px;
+      border-radius: 25px;
+      box-shadow: 0 6px 18px rgba(164, 124, 69, 0.3);
+      font-family: 'Roboto', sans-serif;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.8rem;
+      font-weight: 700;
+      color: #9c7b47;
+      font-size: 1.2rem;
+      letter-spacing: 0.04em;
+    }
+
+    /* Música */
+    #musicControl {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #cfa76e;
+      border: 2px solid #a47c45;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 3px 8px rgba(164, 124, 69, 0.6);
+      transition: background-color 0.3s ease;
+      font-size: 26px;
+      color: #4b3520;
+      user-select: none;
+    }
+
+    #musicControl:hover {
+      background-color: #a47c45;
+      color: #f3e7d3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="heart">❤️</div>
+  <h1>Feliz Dia dos Namorados, amor!</h1>
+  <p>Você é o código que faz meu coração rodar perfeitamente. Sou muito feliz por ter você na minha vida.</p>
+
+  <button id="surpresaBtn">Clique para uma surpresa!</button>
+
+  <!-- Seção do jogo -->
+  <h2>Jogo do Código do Coração</h2>
+  <p>Descubra o código secreto do meu coração! (Dica: a palavra é um apelido fofuxo 👀)</p>
+
+  <input type="text" id="guessInput" placeholder="Digite seu palpite" autocomplete="off" />
+  <button id="checkBtn">Tentar</button>
+
+  <div class="message" id="message"></div>
+
+  <!-- Quiz -->
+  <h2>Quiz: O quanto você me conhece?</h2>
+  <form id="quiz">
+    <label for="q1">1. Em qual mês fazemos 6 meses de namoro?</label>
+    <input type="text" id="q1" name="q1" class="quiz-input" autocomplete="off" />
+
+    <label for="q2">2. Qual é aquela frase - uma das maaais gays kkkk - que sempre falamos?</label>
+    <input type="text" id="q2" name="q2" class="quiz-input" autocomplete="off" />
+
+    <label for="q3">3. Qual foi o primeiro date de comida que fomos?</label>
+    <input type="text" id="q3" name="q3" class="quiz-input" autocomplete="off" />
+
+    <button type="submit">Enviar respostas</button>
+  </form>
+
+  <div id="resultadoQuiz"></div>
+
+  <!-- Player de música -->
+  <audio id="bgMusic" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/22/audio_6a52f3f8e9.mp3?filename=romantic-piano-6152.mp3" type="audio/mpeg" />
+    Seu navegador não suporta o elemento de áudio.
+  </audio>
+
+  <div id="musicControl" title="Ligar/Desligar música">🎵</div>
+
+  <script>
+    // Surpresa do botão principal
+    const surpresaBtn = document.getElementById('surpresaBtn');
+    surpresaBtn.addEventListener('click', () => {
+      alert('Te amo, meu principe 💜💕');
+    });
+
+    // Lógica do jogo do código do coração
+    const secretCode = "bubbaloo";
+    const maxAttempts = 5;
+    let attempts = 0;
+
+    const guessInput = document.getElementById('guessInput');
+    const checkBtn = document.getElementById('checkBtn');
+    const message = document.getElementById('message');
+
+    checkBtn.addEventListener('click', () => {
+      const guess = guessInput.value.trim().toLowerCase();
+      if (!guess) {
+        message.style.color = "#bfa85e"; // amarelo vintage
+        message.textContent = "Por favor, digite o seu palpite.";
+        return;
+      }
+
+      attempts++;
+
+      if (guess === secretCode) {
+        message.style.color = "#bfa85e"; // amarelo vintage
+        message.textContent = `Parabéns! Você acertou o código do meu coração em ${attempts} tentativa${attempts > 1 ? 's' : ''}! ❤️😍`;
+        checkBtn.disabled = true;
+        guessInput.disabled = true;
+      } else {
+        if (attempts >= maxAttempts) {
+          message.style.color = "#c68b7b"; // vermelho queimado suave
+          message.textContent = `Ah não... suas tentativas acabaram! O código era "${secretCode}". Mas o amor é infinito! 💕`;
+          checkBtn.disabled = true;
+          guessInput.disabled = true;
+        } else {
+          message.style.color = "#bfa85e"; // amarelo vintage
+          message.textContent = `Errado! Você tem mais ${maxAttempts - attempts} tentativa${maxAttempts - attempts > 1 ? 's' : ''}. Tente novamente!`;
+          guessInput.value = "";
+          guessInput.focus();
+        }
+      }
+    });
+
+    // Permitir tentar com Enter no jogo
+    guessInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        checkBtn.click();
+      }
+    });
+
+    // Lógica do quiz
+    document.getElementById("quiz").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const respostas = {
+        q1: "agosto",
+        q2: "já falei que te amo hoje?",
+        q3: "pizza 15"
+      };
+
+      let acertos = 0;
+      const dados = new FormData(e.target);
+      for (let [key, value] of dados.entries()) {
+        if (respostas[key] && respostas[key].toLowerCase() === value.trim().toLowerCase()) {
+          acertos++;
+        }
+      }
+
+      const resultadoQuiz = document.getElementById("resultadoQuiz");
+      resultadoQuiz.textContent = `Você acertou ${acertos} de 3 perguntas! ${acertos === 3 ? "Você realmente me conhece muito bem! ❤️" : "Quer tentar de novo?"}`;
+    });
+
+    // Música de fundo
+    const bgMusic = document.getElementById('bgMusic');
+    const musicControl = document.getElementById('musicControl');
+
+    // Tocar música automaticamente - cuidado com autoplay bloqueado pelo navegador
+    function toggleMusic() {
+      if (bgMusic.paused) {
+        bgMusic.play();
+        musicControl.textContent = '🔇';
+        musicControl.title = "Desligar música";
+      } else {
+        bgMusic.pause();
+        musicControl.textContent = '🎵';
+        musicControl.title = "Ligar música";
+      }
+    }
+
+    musicControl.addEventListener('click', () => {
+      toggleMusic();
+    });
+
+    // Tenta tocar no carregamento - pode ser bloqueado
+    window.addEventListener('load', () => {
+      bgMusic.volume = 0.25; // volume suave
+      bgMusic.play().catch(() => {
+        // Autoplay bloqueado, mostra ícone para o usuário ligar manualmente
+        musicControl.textContent = '🎵';
+        musicControl.title = "Clique para ligar a música";
+      });
+    });
+  </script>
+</body>
+</html>
